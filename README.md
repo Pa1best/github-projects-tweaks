@@ -1,32 +1,61 @@
 # GitHub Projects Tweaks
 
-A Chrome extension that makes GitHub Projects boards easier to work with:
+A Chrome extension that makes GitHub Projects boards easier to work with. It only acts on `github.com/orgs/*/projects/*` and `github.com/users/*/projects/*` pages; the rest of github.com is left alone.
 
-- **Board column width** (50–100% of GitHub's 350 px, 80% by default): more columns fit on the screen, the font size stays the same.
-- **Compact header**:
-  - hides the project title (the breadcrumb above already shows it) and lifts the view tabs into its place, with the action buttons on the same row;
-  - Insights, Updates and Workflows show only their icon (and counter), the label moves to the tooltip;
-  - the icon-only Project details button gets a "Readme" label;
-  - the global GitHub header has 25% less vertical padding.
-- **Profile names instead of logins**: wherever GitHub prints a login next to an avatar (table, grouping, slice panel), the name from the user's GitHub profile is shown. The login stays in the tooltip. Users without a profile name keep their login.
+## What it changes
 
-It only acts on `github.com/orgs/*/projects/*` and `github.com/users/*/projects/*` pages; the rest of github.com is left alone.
+### Compact header
 
-## Screenshots
+- The project title is hidden: the breadcrumb at the top already shows it.
+- The view tabs move up into its place, and the action buttons sit on the same row, vertically centred.
+- A little breathing room (3 px) stays above the tabs.
+- The global GitHub header has 25% less vertical padding (12 px instead of 16 px).
+- Together this gives the board about 50 px more height.
 
-**Board:** the project title is gone, the view tabs and buttons share one row, and the narrower columns fit the whole board on screen.
+**Before**
+
+![Header before](docs/screenshots/header-before.png)
+
+**After**
+
+![Header after](docs/screenshots/header-after.png)
+
+### Top bar buttons
+
+- **Insights**, **Updates** and **Workflows** show only their icon; Workflows keeps its counter. The label moves to the tooltip.
+- The icon-only **Project details** button gets a **Readme** label, since that is what it opens.
 
 | Before | After |
 |---|---|
-| ![Board before](docs/screenshots/board-before.jpg) | ![Board after](docs/screenshots/board-after.jpg) |
+| <img src="docs/screenshots/buttons-before.png" alt="Buttons before" width="187"> | <img src="docs/screenshots/buttons-after.png" alt="Buttons after" width="194"> |
 
-**Table:** assignees show profile names instead of logins (`beth-panx` → Beth Pan, `gegao18` → George Gao).
+### Narrower board columns
+
+- Column width is adjustable from 50% to 100% of GitHub's fixed 350 px, 80% by default.
+- More columns fit on the screen, so there is less scrolling left and right.
+- The font size stays the same; long titles wrap onto more lines instead.
+
+**Before**
+
+![Columns before](docs/screenshots/columns-before.png)
+
+**After**
+
+![Columns after](docs/screenshots/columns-after.png)
+
+### Profile names instead of logins
+
+- Wherever GitHub prints a login next to an avatar (table cells, group headers, the slice panel), the name from the user's GitHub profile is shown: `beth-panx` → Beth Pan, `gegao18` → George Gao.
+- The login stays in the tooltip.
+- Users without a name in their profile keep their login.
 
 | Before | After |
 |---|---|
-| ![Table before](docs/screenshots/table-before.jpg) | ![Table after](docs/screenshots/table-after.jpg) |
+| <img src="docs/screenshots/names-before.png" alt="Logins before" width="204"> | <img src="docs/screenshots/names-after.png" alt="Names after" width="203"> |
 
-**Settings popup:**
+### Settings
+
+All of it can be tuned or switched off in the extension popup:
 
 <img src="docs/screenshots/popup.jpg" alt="Settings popup" width="386">
 
