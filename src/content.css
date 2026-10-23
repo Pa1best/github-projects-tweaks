@@ -1,0 +1,105 @@
+/*
+ * Every rule is scoped to a class that content.js puts on <html> only on project pages,
+ * so the rest of github.com is left alone.
+ *
+ * GitHub's own class names are hashed and change between releases, so the selectors
+ * rely on ids, roles and data attributes instead.
+ */
+
+/* Narrower board columns. GitHub fixes them at 350px; text size stays as is. */
+html.gpe-active [data-board-column] {
+  width: calc(350px * var(--gpe-column-scale, 1));
+  min-width: calc(350px * var(--gpe-column-scale, 1));
+}
+
+/* Global GitHub header: vertical padding 25% smaller (16px -> 12px). */
+html.gpe-active.gpe-compact-header .AppHeader .AppHeader-globalBar {
+  padding-top: var(--base-size-12, 12px);
+  padding-bottom: var(--base-size-12, 12px);
+}
+
+/* "Readme" label on the icon-only Project details button, which opens the project README. */
+html.gpe-active [role="navigation"][aria-label="Project"] button:has(> svg.octicon-sidebar-expand, > svg.octicon-sidebar-collapse) {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--base-size-8, 8px);
+  width: auto;
+  padding: 0 var(--base-size-12, 12px);
+}
+
+html.gpe-active [role="navigation"][aria-label="Project"] button:has(> svg.octicon-sidebar-expand, > svg.octicon-sidebar-collapse)::after {
+  content: "Readme";
+  font-weight: var(--base-text-weight-medium, 500);
+}
+
+/* Insights and Updates show only their icon (content.js marks them). The label stays
+   for screen readers and in the tooltip. */
+html.gpe-active .gpe-icon-only {
+  padding-left: var(--base-size-8, 8px);
+  padding-right: var(--base-size-8, 8px);
+}
+
+html.gpe-active .gpe-icon-only [data-component="leadingVisual"] {
+  margin-right: 0;
+}
+
+html.gpe-active .gpe-icon-only [data-component="text"] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Compact header: hide the project title (the breadcrumb above already shows it)
+   and lift the view tabs into its place, with the action buttons on the same row. */
+html.gpe-active.gpe-compact-header {
+  --gpe-header-gap: 3px;
+}
+
+html.gpe-active.gpe-compact-header :has(> [role="navigation"][aria-label="Project"]) {
+  position: relative;
+}
+
+/* Breathing room above the lifted tabs. */
+html.gpe-active.gpe-compact-header #memex-project-view-root > :first-child {
+  padding-top: var(--gpe-header-gap);
+}
+
+/* The view options chevron is positioned absolutely, so it does not follow the padding. */
+html.gpe-active.gpe-compact-header #memex-project-view-root > :first-child > :nth-child(2) {
+  transform: translateY(var(--gpe-header-gap));
+}
+
+html.gpe-active.gpe-compact-header [role="navigation"][aria-label="Project"] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 2;
+  /* The height of the tab row, so the buttons sit in its vertical middle. */
+  height: calc(36px + var(--gpe-header-gap));
+  min-height: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+  /* GitHub uses wrap-reverse here, which pushes the buttons to the bottom. */
+  flex-wrap: nowrap;
+  align-items: center;
+  align-content: center;
+  background: transparent;
+}
+
+html.gpe-active.gpe-compact-header [role="navigation"][aria-label="Project"] > :last-child {
+  align-items: center;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+html.gpe-active.gpe-compact-header [role="navigation"][aria-label="Project"] > :not(:last-child) {
+  display: none;
+}
+
+html.gpe-active.gpe-compact-header #memex-project-view-root > :first-child > :first-child {
+  max-width: calc(100% - var(--gpe-actions-width, 0px));
+  overflow: hidden;
+}

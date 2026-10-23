@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <h1>GitHub Projects Tweaks</h1>
+
+  <label class="row" for="columnWidth">
+    <span>Column width</span>
+    <output id="columnWidthValue"></output>
+  </label>
+  <input id="columnWidth" type="range" min="50" max="100" step="5">
+
+  <label class="row check">
+    <input id="compactHeader" type="checkbox">
+    <span>Compact header: hide the project title, lift the view tabs</span>
+  </label>
+
+  <label class="row check">
+    <input id="showNames" type="checkbox">
+    <span>Profile names instead of logins</span>
+  </label>
+
+  <button id="clearCache" type="button">Refresh names</button>
+  <p id="status" class="hint"></p>
+
+  <script src="../src/settings.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
