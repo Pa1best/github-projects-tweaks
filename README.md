@@ -12,6 +12,24 @@ A Chrome extension that makes GitHub Projects boards easier to work with:
 
 It only acts on `github.com/orgs/*/projects/*` and `github.com/users/*/projects/*` pages; the rest of github.com is left alone.
 
+## Screenshots
+
+**Board:** the project title is gone, the view tabs and buttons share one row, and the narrower columns fit the whole board on screen.
+
+| Before | After |
+|---|---|
+| ![Board before](docs/screenshots/board-before.jpg) | ![Board after](docs/screenshots/board-after.jpg) |
+
+**Table:** assignees show profile names instead of logins (`beth-panx` → Beth Pan, `gegao18` → George Gao).
+
+| Before | After |
+|---|---|
+| ![Table before](docs/screenshots/table-before.jpg) | ![Table after](docs/screenshots/table-after.jpg) |
+
+**Settings popup:**
+
+<img src="docs/screenshots/popup.jpg" alt="Settings popup" width="386">
+
 ## Installation
 
 1. Open `chrome://extensions`.
