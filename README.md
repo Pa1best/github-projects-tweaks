@@ -2,6 +2,32 @@
 
 A Chrome extension that makes GitHub Projects boards easier to work with. It only acts on `github.com/orgs/*/projects/*` and `github.com/users/*/projects/*` pages; the rest of github.com is left alone.
 
+## Overview
+
+### Board
+
+The project title is gone, the view tabs and buttons share one row, and the narrower columns fit the whole board on screen.
+
+**Before**
+
+![Board before](docs/screenshots/overview-board-before.jpg)
+
+**After**
+
+![Board after](docs/screenshots/overview-board-after.jpg)
+
+### Table
+
+The same compact header, and assignees show profile names instead of logins.
+
+**Before**
+
+![Table before](docs/screenshots/overview-table-before.jpg)
+
+**After**
+
+![Table after](docs/screenshots/overview-table-after.jpg)
+
 ## What it changes
 
 ### Compact header
