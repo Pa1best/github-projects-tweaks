@@ -18,6 +18,7 @@
       if (active && settings.showNames) GpeNames.scan();
       trackActionsWidth();
       markIconOnlyButtons();
+      markBoardGutters();
     });
   }
 
@@ -33,6 +34,27 @@
       const button = label.closest('a, button');
       button.classList.add('gpe-icon-only');
       button.title = text;
+    }
+  }
+
+  // The board and the filter bar above it sit in containers with wide side padding.
+  // Their classes are hashed, so the padded ones are found by walking up from the
+  // board and from the filter input, and marked for content.css to narrow.
+  const GUTTER_MIN = 16;
+  function markBoardGutters() {
+    const viewRoot = document.getElementById('memex-project-view-root');
+    const board = viewRoot?.querySelector('[data-board-column]');
+    root.classList.toggle('gpe-board', Boolean(board));
+    if (!board) return;
+    const filter = document.getElementById('filter-bar-component-input');
+    for (const start of [board, filter]) {
+      for (let el = start?.parentElement; el && el !== viewRoot; el = el.parentElement) {
+        if (el.classList.contains('gpe-gutter')) continue;
+        const style = getComputedStyle(el);
+        if (parseFloat(style.paddingLeft) >= GUTTER_MIN || parseFloat(style.paddingRight) >= GUTTER_MIN) {
+          el.classList.add('gpe-gutter');
+        }
+      }
     }
   }
 

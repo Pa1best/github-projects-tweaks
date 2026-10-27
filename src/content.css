@@ -12,10 +12,34 @@ html.gpe-active [data-board-column] {
   min-width: calc(350px * var(--gpe-column-scale, 1));
 }
 
+/* Board view: narrower side gutters around the board and the filter bar (content.js
+   marks the padded containers). Only while a board is shown, the table keeps its layout. */
+html.gpe-active.gpe-board .gpe-gutter {
+  padding-left: var(--base-size-8, 8px);
+  padding-right: var(--base-size-8, 8px);
+}
+
+/* 8px above the filter bar, and none below it: the board already has 8px on top. */
+html.gpe-active.gpe-board .gpe-gutter:has(#filter-bar-component-input) {
+  padding-top: var(--base-size-8, 8px);
+  padding-bottom: 0;
+}
+
 /* Global GitHub header: vertical padding 25% smaller (16px -> 12px). */
 html.gpe-active.gpe-compact-header .AppHeader .AppHeader-globalBar {
   padding-top: var(--base-size-12, 12px);
   padding-bottom: var(--base-size-12, 12px);
+}
+
+/* The newer GlobalNav header: vertical padding halved (16px -> 8px, 64px -> 48px tall),
+   and no bottom line, so it runs straight into the view tabs. */
+html.gpe-active.gpe-compact-header header.GlobalNav {
+  box-shadow: none;
+}
+
+html.gpe-active.gpe-compact-header header.GlobalNav > * > * {
+  padding-top: var(--base-size-8, 8px);
+  padding-bottom: var(--base-size-8, 8px);
 }
 
 /* "Readme" label on the icon-only Project details button, which opens the project README. */
