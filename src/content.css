@@ -127,3 +127,91 @@ html.gpe-active.gpe-compact-header #memex-project-view-root > :first-child > :fi
   max-width: calc(100% - var(--gpe-actions-width, 0px));
   overflow: hidden;
 }
+
+/* Button on board cards that opens the assignee picker (assignees.js). Shows on hover. */
+html.gpe-active .gpe-assign-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  margin-right: var(--base-size-4, 4px);
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  color: var(--fgColor-muted, #9198a1);
+  background: transparent;
+  cursor: pointer;
+  opacity: 0;
+}
+
+html.gpe-active [data-board-card-id]:is(:hover, :focus-within) .gpe-assign-button {
+  opacity: 1;
+}
+
+html.gpe-active .gpe-assign-button:hover {
+  color: var(--fgColor-default, #f0f6fc);
+  background: var(--bgColor-neutral-muted, rgba(101, 108, 118, 0.2));
+}
+
+/* While the picker is open from a card: the side panel it lives in stays hidden and the
+   picker sits next to the card. assignees.js sets the offsets. */
+html.gpe-assigning [role="dialog"][aria-label^="Side panel"] {
+  visibility: hidden;
+}
+
+/* Hidden with opacity until assignees.js has put it in place: Primer gives the overlay
+   and some of its parts (checkmarks, the search icon) their own visibility, which
+   would show through a visibility-based hide. */
+html.gpe-assigning [role="dialog"][aria-label^="Side panel"] [role="dialog"][data-component="AnchoredOverlay"] {
+  visibility: visible !important;
+  opacity: 0 !important;
+  pointer-events: none;
+  position: fixed !important;
+  left: var(--gpe-assign-x, 0) !important;
+  top: var(--gpe-assign-y, 0) !important;
+}
+
+html.gpe-assigning.gpe-assign-placed [role="dialog"][aria-label^="Side panel"] [role="dialog"][data-component="AnchoredOverlay"] {
+  opacity: 1 !important;
+  pointer-events: auto;
+}
+
+/* The picker's stand-in while the real one is getting into place. */
+html.gpe-assigning .gpe-assign-ghost {
+  position: fixed !important;
+  z-index: 1000;
+  margin: 0;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: none;
+  animation: none !important;
+}
+
+/* Profile names: the "Select assignees" picker already lists each person's name next to
+   the login; put the name first and in bold, the login after it in small grey text.
+   People without a name in their profile keep the login as is. */
+html.gpe-names [data-component="AnchoredOverlay"]:has(input[aria-label="Filter assignees"]) [data-description-variant="inline"]:has(> [data-component="ActionList.Description"]:not(:empty)) > [data-component="ActionList.Description"] {
+  order: -1;
+  font-size: var(--text-body-size-medium, 14px);
+  line-height: 20px;
+  font-weight: var(--base-text-weight-semibold, 600);
+  color: var(--fgColor-default, #f0f6fc);
+}
+
+html.gpe-names [data-component="AnchoredOverlay"]:has(input[aria-label="Filter assignees"]) [data-description-variant="inline"]:has(> [data-component="ActionList.Description"]:not(:empty)) > [data-component="ActionList.Item.Label"] {
+  font-size: var(--text-body-size-small, 12px);
+  line-height: 16px;
+  font-weight: var(--base-text-weight-normal, 400);
+  color: var(--fgColor-muted, #9198a1);
+}
+
+/* Profile names in the item panel's assignee list: the login after the name
+   (names.js keeps it in data-gpe-login). */
+html.gpe-names [data-testid="issue-assignees"][data-gpe-login]::after {
+  content: attr(data-gpe-login);
+  margin-left: var(--base-size-8, 8px);
+  font-size: var(--text-body-size-small, 12px);
+  font-weight: var(--base-text-weight-normal, 400);
+  color: var(--fgColor-muted, #9198a1);
+}

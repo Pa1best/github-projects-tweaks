@@ -3,6 +3,7 @@ const GPE_DEFAULTS = {
   columnWidth: 80,   // board column width, percent of GitHub's 350px
   compactHeader: true,
   showNames: true,
+  quickAssign: true,
 };
 
 function gpeLoadSettings() {

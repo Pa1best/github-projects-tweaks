@@ -126,6 +126,15 @@ const GpeNames = (() => {
       const walker = document.createTreeWalker(container, NodeFilter.SHOW_TEXT);
       while (walker.nextNode()) processTextNode(walker.currentNode);
     }
+    // The item panel's assignee list keeps the login apart from the avatar. The login
+    // goes into an attribute that content.css shows after the name in small grey text.
+    for (const label of root.querySelectorAll('[data-testid="issue-assignees"]')) {
+      const node = label.firstChild;
+      if (node?.nodeType !== Node.TEXT_NODE) continue;
+      processTextNode(node);
+      const record = replaced.get(node);
+      if (record?.written === node.nodeValue) label.dataset.gpeLogin = record.original.trim();
+    }
     for (const node of replaced.keys()) {
       if (!node.isConnected) replaced.delete(node);
     }
@@ -136,6 +145,7 @@ const GpeNames = (() => {
       if (node.isConnected && node.nodeValue === record.written) {
         node.nodeValue = record.original;
         node.parentElement?.removeAttribute('title');
+        node.parentElement?.removeAttribute('data-gpe-login');
       }
     }
     replaced.clear();
