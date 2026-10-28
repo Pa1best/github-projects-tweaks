@@ -87,11 +87,13 @@ The same compact header, and assignees show profile names instead of logins.
 - Clicking the avatar itself still filters the board by that person.
 - Can be switched off in the popup: **Change assignees from a button on board cards**.
 
+<img src="docs/screenshots/assignee-picker.png" alt="Select assignees picker under a board card" width="372">
+
 ### Settings
 
 All of it can be tuned or switched off in the extension popup:
 
-<img src="docs/screenshots/popup.jpg" alt="Settings popup" width="386">
+<img src="docs/screenshots/popup.jpg" alt="Settings popup" width="354">
 
 ## Installation
 
