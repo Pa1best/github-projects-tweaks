@@ -16,6 +16,7 @@
     requestAnimationFrame(() => {
       scanQueued = false;
       if (active && settings.showNames) GpeNames.scan();
+      if (active && settings.quickAssign) GpeAssignees.scan();
       trackActionsWidth();
       markIconOnlyButtons();
       markBoardGutters();
@@ -76,12 +77,20 @@
   function applySettings() {
     root.classList.toggle('gpe-active', active);
     root.classList.toggle('gpe-compact-header', active && settings.compactHeader);
+    root.classList.toggle('gpe-names', active && settings.showNames);
     root.style.setProperty('--gpe-column-scale', String(settings.columnWidth / 100));
 
     if (active && settings.showNames) {
       GpeNames.enable(queueScan).then(queueScan);
     } else {
       GpeNames.disable();
+    }
+
+    if (active && settings.quickAssign) {
+      GpeAssignees.enable();
+      queueScan();
+    } else {
+      GpeAssignees.disable();
     }
   }
 

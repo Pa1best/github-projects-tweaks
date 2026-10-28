@@ -2,6 +2,7 @@ const columnWidth = document.getElementById('columnWidth');
 const columnWidthValue = document.getElementById('columnWidthValue');
 const compactHeader = document.getElementById('compactHeader');
 const showNames = document.getElementById('showNames');
+const quickAssign = document.getElementById('quickAssign');
 const status = document.getElementById('status');
 
 gpeLoadSettings().then(settings => {
@@ -9,6 +10,7 @@ gpeLoadSettings().then(settings => {
   columnWidthValue.textContent = `${settings.columnWidth}%`;
   compactHeader.checked = settings.compactHeader;
   showNames.checked = settings.showNames;
+  quickAssign.checked = settings.quickAssign;
 });
 
 columnWidth.addEventListener('input', () => {
@@ -18,6 +20,7 @@ columnWidth.addEventListener('input', () => {
 
 compactHeader.addEventListener('change', () => gpeSaveSettings({ compactHeader: compactHeader.checked }));
 showNames.addEventListener('change', () => gpeSaveSettings({ showNames: showNames.checked }));
+quickAssign.addEventListener('change', () => gpeSaveSettings({ quickAssign: quickAssign.checked }));
 
 document.getElementById('clearCache').addEventListener('click', async () => {
   await chrome.storage.local.remove('gpeNames');

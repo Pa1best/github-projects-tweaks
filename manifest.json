@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "GitHub Projects Tweaks",
   "version": "0.1.0",
-  "description": "Narrower board columns, a compact header and profile names instead of logins in GitHub Projects.",
+  "description": "Narrower board columns, a compact header, profile names instead of logins and assignee changes from board cards in GitHub Projects.",
   "permissions": ["storage"],
   "action": {
     "default_title": "GitHub Projects Tweaks",
@@ -11,7 +11,7 @@
   "content_scripts": [
     {
       "matches": ["https://github.com/*"],
-      "js": ["src/settings.js", "src/names.js", "src/content.js"],
+      "js": ["src/settings.js", "src/names.js", "src/assignees.js", "src/content.js"],
       "css": ["src/content.css"],
       "run_at": "document_idle"
     }
