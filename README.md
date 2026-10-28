@@ -35,8 +35,9 @@ The same compact header, and assignees show profile names instead of logins.
 - The project title is hidden: the breadcrumb at the top already shows it.
 - The view tabs move up into its place, and the action buttons sit on the same row, vertically centred.
 - A little breathing room (3 px) stays above the tabs.
-- The global GitHub header has 25% less vertical padding (12 px instead of 16 px).
-- Together this gives the board about 50 px more height.
+- The global GitHub header is 48 px tall instead of 64 px (8 px vertical padding instead of 16 px), and the line under it is gone, so it runs straight into the view tabs.
+- On board views the filter bar sits 8 px from the tabs and from the columns, and the side gutters around the board are 8 px instead of 16 px.
+- Together this gives the board about 77 px more height.
 
 **Before**
 
