@@ -111,7 +111,7 @@ After pulling changes, click **Reload** on the extension card in `chrome://exten
 | File | Purpose |
 |---|---|
 | `src/content.js` | Turns itself on for project pages (GitHub is a single-page app, so the URL is checked every 0.5 s), puts classes on `<html>`, watches the DOM |
-| `src/content.css` | Column width, compact header, the assignee button and picker placement |
+| `src/content.css` | Column width, compact header, board gutters, the assignee button and picker placement |
 | `src/names.js` | Replaces logins with profile names |
 | `src/assignees.js` | Assignee button on board cards |
 | `src/settings.js` | Default settings shared by the page and the popup |
