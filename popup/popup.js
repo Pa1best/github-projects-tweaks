@@ -3,6 +3,7 @@ const columnWidthValue = document.getElementById('columnWidthValue');
 const compactHeader = document.getElementById('compactHeader');
 const showNames = document.getElementById('showNames');
 const quickAssign = document.getElementById('quickAssign');
+const toggles = ['noMiddleDrag', 'hideMerged'].map(id => document.getElementById(id));
 const status = document.getElementById('status');
 
 gpeLoadSettings().then(settings => {
@@ -11,6 +12,7 @@ gpeLoadSettings().then(settings => {
   compactHeader.checked = settings.compactHeader;
   showNames.checked = settings.showNames;
   quickAssign.checked = settings.quickAssign;
+  for (const box of toggles) box.checked = settings[box.id];
 });
 
 columnWidth.addEventListener('input', () => {
@@ -21,6 +23,7 @@ columnWidth.addEventListener('input', () => {
 compactHeader.addEventListener('change', () => gpeSaveSettings({ compactHeader: compactHeader.checked }));
 showNames.addEventListener('change', () => gpeSaveSettings({ showNames: showNames.checked }));
 quickAssign.addEventListener('change', () => gpeSaveSettings({ quickAssign: quickAssign.checked }));
+for (const box of toggles) box.addEventListener('change', () => gpeSaveSettings({ [box.id]: box.checked }));
 
 document.getElementById('clearCache').addEventListener('click', async () => {
   await chrome.storage.local.remove('gpeNames');

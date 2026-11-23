@@ -4,6 +4,9 @@ const GPE_DEFAULTS = {
   compactHeader: true,
   showNames: true,
   quickAssign: true,
+  noMiddleDrag: true,  // pressing the wheel over a card does not drag it
+  hideMerged: true,    // merged pull requests behind a switch in the Development picker
+  devShowMerged: false,
 };
 
 function gpeLoadSettings() {
