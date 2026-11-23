@@ -240,3 +240,33 @@ html.gpe-names [data-testid="issue-assignees"][data-gpe-login]::after {
   margin: 0;
   cursor: pointer;
 }
+
+/* "#" field next to the filter bar (numbersearch.js). */
+html.gpe-active .gpe-number-search {
+  flex: 0 0 auto;
+  width: 80px;
+  height: 32px;
+  margin: 0;
+  padding: 0 var(--base-size-8, 8px);
+  font: inherit;
+  font-size: var(--text-body-size-medium, 14px);
+  color: var(--fgColor-default, #f0f6fc);
+  background: var(--bgColor-default, #0d1117);
+  border: 1px solid var(--borderColor-default, #3d444d);
+  border-radius: var(--borderRadius-medium, 6px);
+}
+
+html.gpe-active .gpe-number-search:focus {
+  outline: 2px solid var(--focus-outlineColor, #1f6feb);
+  outline-offset: -1px;
+}
+
+/* Matches outlined, the rest dimmed: hiding would break the views' scroll layout. */
+html.gpe-active.gpe-number-searching :is([data-board-card-id], #memex-project-view-root [role="row"]:has([role="gridcell"])):not(.gpe-number-match) {
+  opacity: 0.3;
+}
+
+html.gpe-active.gpe-number-searching .gpe-number-match {
+  outline: 2px solid var(--borderColor-accent-emphasis, #1f6feb);
+  outline-offset: -2px;
+}

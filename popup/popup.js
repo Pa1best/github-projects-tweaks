@@ -3,7 +3,7 @@ const columnWidthValue = document.getElementById('columnWidthValue');
 const compactHeader = document.getElementById('compactHeader');
 const showNames = document.getElementById('showNames');
 const quickAssign = document.getElementById('quickAssign');
-const toggles = ['noMiddleDrag', 'hideMerged'].map(id => document.getElementById(id));
+const toggles = ['numberSearch', 'noMiddleDrag', 'hideMerged'].map(id => document.getElementById(id));
 const status = document.getElementById('status');
 
 gpeLoadSettings().then(settings => {

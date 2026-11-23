@@ -11,7 +11,7 @@
   "content_scripts": [
     {
       "matches": ["https://github.com/*"],
-      "js": ["src/settings.js", "src/names.js", "src/assignees.js", "src/devlinks.js", "src/content.js"],
+      "js": ["src/settings.js", "src/names.js", "src/assignees.js", "src/devlinks.js", "src/numbersearch.js", "src/content.js"],
       "css": ["src/content.css"],
       "run_at": "document_idle"
     }
