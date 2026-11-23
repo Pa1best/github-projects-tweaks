@@ -90,6 +90,17 @@ The same compact header, and assignees show profile names instead of logins.
 
 <img src="docs/screenshots/assignee-picker.png" alt="Select assignees picker under a board card" width="372">
 
+### No card dragging with the mouse wheel
+
+- Pressing the mouse wheel over a card to scroll the board (Chrome's autoscroll) no longer drags the card along. The board still scrolls.
+- Can be switched off in the popup: **Pressing the mouse wheel over a card does not drag it**.
+
+### Merged pull requests hidden in the Development picker
+
+- The **Development** picker (link a branch or pull request) hides merged pull requests, so only the open ones are offered.
+- A **Show merged** switch at the top of the picker brings them back; it is off by default and remembers its state. Pull requests already linked stay visible.
+- Works on issue pages as well as in projects. Can be switched off in the popup: **Hide merged pull requests in the Development picker**.
+
 ### Settings
 
 All of it can be tuned or switched off in the extension popup:
@@ -112,15 +123,20 @@ After pulling changes, click **Reload** on the extension card in `chrome://exten
 | File | Purpose |
 |---|---|
 | `src/content.js` | Turns itself on for project pages (GitHub is a single-page app, so the URL is checked every 0.5 s), puts classes on `<html>`, watches the DOM |
-| `src/content.css` | Column width, compact header, board gutters, the assignee button and picker placement |
+| `src/content.css` | Column width, compact header, board gutters, the assignee button and picker placement, hidden merged pull requests |
 | `src/names.js` | Replaces logins with profile names |
 | `src/assignees.js` | Assignee button on board cards |
+| `src/devlinks.js` | Merged pull requests and the **Show merged** switch in the Development picker |
 | `src/settings.js` | Default settings shared by the page and the popup |
 | `popup/` | Settings popup |
 
 Names come from the same user card GitHub shows on hover (`/users/{login}/hovercard`): the request uses your session, needs no token and has no API rate limit. Names are cached for 7 days; **Refresh names** clears the cache.
 
 The assignee picker only exists in the item side panel, so the card button opens the panel through its URL (`?pane=issue&itemId=…`, the id is the card's `data-board-card-id`), keeps it hidden, presses its **Edit Assignees** button and moves the picker next to the card. The panel slides in, and the picker moves with it, so the real picker stays transparent until the panel's animations end and its position holds still for a few frames; meanwhile a static copy of it (a DOM clone) stands at the final place. When the picker closes, the hidden panel is closed with its **Close panel** button (found by its tooltip: the panel also has a **Close issue** button).
+
+A press of the mouse wheel on a card is stopped in the capture phase before the board's drag handling sees it; the browser's own autoscroll is a default action, so it still runs.
+
+The Development picker is found by its search field (`Search pull requests`), and merged pull requests by their `octicon-git-merge` icon.
 
 In the assignee picker the names are already there as descriptions, so only CSS swaps them with the logins. In the item panel's **Assignees** list `names.js` writes the name and keeps the login in `data-gpe-login`, which CSS shows after it.
 

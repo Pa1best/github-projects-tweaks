@@ -74,6 +74,15 @@
     actionsObserver.observe(actions);
   }
 
+  // The board starts dragging a card on any mouse button. Pressing the wheel over a
+  // card to scroll the board (Chrome's autoscroll) dragged the card along: the press
+  // is kept from the page, so the drag never starts. The browser still scrolls.
+  function blockMiddleDrag(event) {
+    if (event.button !== 1 || !active || !settings.noMiddleDrag) return;
+    if (event.target.closest?.('[data-board-card-id]')) event.stopPropagation();
+  }
+  for (const type of ['pointerdown', 'mousedown']) addEventListener(type, blockMiddleDrag, true);
+
   function applySettings() {
     root.classList.toggle('gpe-active', active);
     root.classList.toggle('gpe-compact-header', active && settings.compactHeader);
@@ -85,6 +94,8 @@
     } else {
       GpeNames.disable();
     }
+
+    GpeDevLinks.setEnabled(settings.hideMerged, settings.devShowMerged);
 
     if (active && settings.quickAssign) {
       GpeAssignees.enable();
