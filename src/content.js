@@ -17,6 +17,7 @@
       scanQueued = false;
       if (active && settings.showNames) GpeNames.scan();
       if (active && settings.quickAssign) GpeAssignees.scan();
+      if (active && settings.numberSearch) GpeNumberSearch.scan();
       trackActionsWidth();
       markIconOnlyButtons();
       markBoardGutters();
@@ -96,6 +97,13 @@
     }
 
     GpeDevLinks.setEnabled(settings.hideMerged, settings.devShowMerged);
+
+    if (active && settings.numberSearch) {
+      GpeNumberSearch.enable();
+      queueScan();
+    } else {
+      GpeNumberSearch.disable();
+    }
 
     if (active && settings.quickAssign) {
       GpeAssignees.enable();

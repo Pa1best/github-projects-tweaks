@@ -90,6 +90,14 @@ The same compact header, and assignees show profile names instead of logins.
 
 <img src="docs/screenshots/assignee-picker.png" alt="Select assignees picker under a board card" width="372">
 
+### Find an item by its number
+
+- A small **#** field next to the filter bar, in the board and in the table. GitHub's own filter only matches titles.
+- Typing a number outlines the items whose number starts with it, dims the rest and scrolls to the first match. **Enter** opens it in the side panel, **Escape** clears the field.
+- Only the items GitHub has drawn are searched: both views draw just what is in sight, so scroll if an item further down is not found.
+- In the table, sub-issues of collapsed parents are searched too: when the number is not among the drawn rows, the parent holding it (up to three levels down) is expanded. Parents expanded this way collapse again when the number changes or the field is cleared.
+- Can be switched off in the popup: **Find items by number**.
+
 ### No card dragging with the mouse wheel
 
 - Pressing the mouse wheel over a card to scroll the board (Chrome's autoscroll) no longer drags the card along. The board still scrolls.
@@ -126,6 +134,7 @@ After pulling changes, click **Reload** on the extension card in `chrome://exten
 | `src/content.css` | Column width, compact header, board gutters, the assignee button and picker placement, hidden merged pull requests |
 | `src/names.js` | Replaces logins with profile names |
 | `src/assignees.js` | Assignee button on board cards |
+| `src/numbersearch.js` | The **#** field that finds items by number |
 | `src/devlinks.js` | Merged pull requests and the **Show merged** switch in the Development picker |
 | `src/settings.js` | Default settings shared by the page and the popup |
 | `popup/` | Settings popup |
@@ -135,6 +144,8 @@ Names come from the same user card GitHub shows on hover (`/users/{login}/hoverc
 The assignee picker only exists in the item side panel, so the card button opens the panel through its URL (`?pane=issue&itemId=…`, the id is the card's `data-board-card-id`), keeps it hidden, presses its **Edit Assignees** button and moves the picker next to the card. The panel slides in, and the picker moves with it, so the real picker stays transparent until the panel's animations end and its position holds still for a few frames; meanwhile a static copy of it (a DOM clone) stands at the final place. When the picker closes, the hidden panel is closed with its **Close panel** button (found by its tooltip: the panel also has a **Close issue** button).
 
 A press of the mouse wheel on a card is stopped in the capture phase before the board's drag handling sees it; the browser's own autoscroll is a default action, so it still runs.
+
+For sub-issues of collapsed rows the **#** field asks the endpoint the table itself uses when a row is expanded (its URL is in `#memex-items-sub-issues-api-data`), with the view's filter as `q`, and then presses the row's **Expand** button.
 
 The Development picker is found by its search field (`Search pull requests`), and merged pull requests by their `octicon-git-merge` icon.
 
